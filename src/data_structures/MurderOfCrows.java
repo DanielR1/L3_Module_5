@@ -30,6 +30,14 @@ public class MurderOfCrows {
          */
         
         /* 2. How many innocent crows had to die before the diamond was found? */
+    	for (int i = 0; i < 5; i++) {
+			
+		
+if(theMurder.get(i).getStomachContents().contains("diamond")==true) {
+	System.out.println(""+theMurder.get(i).getName()+" is guilty, "+i+" innocent crows died");
+	i=5;
+}
+    	}
     	int random = new Random().nextInt(theMurder.size());
     	
         

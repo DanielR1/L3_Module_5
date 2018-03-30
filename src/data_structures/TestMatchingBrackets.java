@@ -20,7 +20,24 @@ public class TestMatchingBrackets {
 
 	// USE A STACK TO COMPLETE THE METHOD FOR CHECKING IF EVERY OPENING BRACKET HAS A MATCHING CLOSING BRACKET
 	private boolean doBracketsMatch(String b) {
+		Stack<Character> s = new Stack<Character>();
+		for (int i = 0; i < b.length(); i++) {
+			if(b.substring(i, i+1).equals("{")) {
+				s.push('a');
+			}
+			if(b.substring(i, i+1).equals("}")) {
+				if(s.size()>0) {
+				s.pop();
+				}
+			}
+		}
+		if(s.empty()){
+			return true;
+		}
+		else {
 		return false;
+		}
 	}
+		
 
 }
