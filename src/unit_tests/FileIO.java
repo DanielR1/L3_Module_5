@@ -2,10 +2,15 @@ package unit_tests;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,6 +24,7 @@ public class FileIO implements ActionListener {
 	JButton button2;
 	JPanel panel;
 	JTextArea area;
+	JFileChooser choose;
 
 	void setup() {
 		frame = new JFrame();
@@ -50,6 +56,7 @@ public class FileIO implements ActionListener {
 			try {
 				FileWriter write = new FileWriter(name);
 				write.write(area.getText());
+				write.close();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -57,7 +64,31 @@ public class FileIO implements ActionListener {
 
 		}
 		if (e.getSource().equals(button2)) {
+			String total;
 			// finish something here
+			choose = new JFileChooser();
+			choose.showOpenDialog(frame);
+			File chosen = choose.getSelectedFile();
+			BufferedReader read;
+			try {
+				read = new BufferedReader(new FileReader(chosen));
+				 total="";
+				 String line = read.readLine();
+				 while(line!=null) {
+					 total+=line+"\n";
+					 
+					 line=read.readLine();
+				 }
+				 area.setText(total);
+					}
+			 catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 	}
 }
